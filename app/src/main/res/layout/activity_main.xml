@@ -4,17 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity"
     android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/alice_blue"
+            android:minHeight="?attr/actionBarSize">
+        </androidx.appcompat.widget.Toolbar>
 
     <TextView
         android:id="@+id/tvInput"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="#efefef"
-        android:textSize="48sp"
+        android:layout_height="200dp"
+        android:background="@drawable/rounded_text_view"
+        android:backgroundTint="@color/alice_blue"
+        android:textSize="44sp"
         android:maxLength="12"/>
-
+    <!-- Row 0 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,21 +32,421 @@
         android:layout_weight="1"
         android:orientation="horizontal">
         <Button
-            android:id=""
+            android:id="@+id/btnSquareRoot"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="1"/>
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:layout_marginHorizontal="10dp"
+            android:textSize="30sp"
+            android:text="√"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnPI"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:layout_marginHorizontal="10dp"
+            android:textSize="30sp"
+            android:text="兀"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnToThePowerOf"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:layout_marginHorizontal="10dp"
+            android:textSize="30sp"
+            android:text="⌃"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnFactorial"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:layout_marginHorizontal="10dp"
+            android:textSize="30sp"
+            android:text="!"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnShowMoreOperations"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/ic_baseline_expand_more"
+            android:layout_marginHorizontal="10dp"
+            style="?android:attr/borderlessButtonStyle"/>
+    </LinearLayout>
+
+    <!-- Row 1 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_weight="1"
+        android:visibility="visible"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnDEG"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:layout_margin="5dp"
+            android:textSize="24sp"
+            android:text="DEG"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnSine"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:layout_margin="5dp"
+            android:textSize="24sp"
+            android:text="sin"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnCosine"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:layout_margin="5dp"
+            android:textSize="24sp"
+            android:text="cos"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnTangent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:layout_margin="5dp"
+            android:textSize="24sp"
+            android:text="tan"
+            style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="2"/>
+            android:visibility="invisible"/>
+    </LinearLayout>
+
+    <!-- Row 2 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_weight="1"
+        android:visibility="visible"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnINV"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:layout_margin="5dp"
+            android:textSize="24sp"
+            android:text="INV"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnExponent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:layout_margin="5dp"
+            android:textSize="24sp"
+            android:text="e"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnNaturalLogarithm"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:layout_margin="5dp"
+            android:textSize="24sp"
+            android:text="ln"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnLogarithm"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:layout_margin="5dp"
+            android:textSize="24sp"
+            android:text="log"
+            style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="3"/>
+            android:visibility="invisible"/>
+    </LinearLayout>
+
+    <!-- Row 3 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnAC"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/pang"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="AC"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnParenthesis"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/pale_cornflower_blue"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="( )"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnModulus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/pale_cornflower_blue"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="%"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnDivision"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/pale_cornflower_blue"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="÷"
+            style="?android:attr/borderlessButtonStyle"/>
+    </LinearLayout>
+
+    <!-- Row 4 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnSeven"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="7"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnEight"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="8"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnNine"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="9"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnMultiplication"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/pale_cornflower_blue"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="×"
+            style="?android:attr/borderlessButtonStyle"/>
+    </LinearLayout>
+
+    <!-- Row 5 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnFour"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="4"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnFive"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="5"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnSix"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="6"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnMinus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/pale_cornflower_blue"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="−"
+            style="?android:attr/borderlessButtonStyle"/>
+    </LinearLayout>
+
+    <!-- Row 6 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnOne"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="1"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnTwo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="2"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnThree"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="3"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnAddition"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/pale_cornflower_blue"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="+"
+            style="?android:attr/borderlessButtonStyle"/>
+    </LinearLayout>
+
+    <!-- Row 7 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnZero"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="0"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnDot"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="•"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnBackspace"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="\u232b"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/btnEquals"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/lavender"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:text="="
+            style="?android:attr/borderlessButtonStyle"/>
     </LinearLayout>
 
 </LinearLayout>
