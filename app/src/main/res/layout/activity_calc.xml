@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".MainActivity"
+    tools:context=".CalcActivity"
     android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
@@ -24,10 +24,11 @@
         android:backgroundTint="@color/alice_blue"
         android:textSize="44sp"
         android:maxLength="12"/>
+
     <!-- Row 0 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="2dp"
         android:layout_weight="1"
         android:orientation="horizontal">
@@ -85,120 +86,130 @@
             style="?android:attr/borderlessButtonStyle"/>
     </LinearLayout>
 
-    <!-- Row 1 -->
     <LinearLayout
+        android:id="@+id/llMoreOperations"
         android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_weight="1"
-        android:visibility="visible"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/btnDEG"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_button"
-            android:backgroundTint="@color/white"
-            android:layout_margin="5dp"
-            android:textSize="24sp"
-            android:text="DEG"
-            style="?android:attr/borderlessButtonStyle"/>
-        <Button
-            android:id="@+id/btnSine"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_button"
-            android:backgroundTint="@color/white"
-            android:layout_margin="5dp"
-            android:textSize="24sp"
-            android:text="sin"
-            style="?android:attr/borderlessButtonStyle"/>
-        <Button
-            android:id="@+id/btnCosine"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_button"
-            android:backgroundTint="@color/white"
-            android:layout_margin="5dp"
-            android:textSize="24sp"
-            android:text="cos"
-            style="?android:attr/borderlessButtonStyle"/>
-        <Button
-            android:id="@+id/btnTangent"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_button"
-            android:backgroundTint="@color/white"
-            android:layout_margin="5dp"
-            android:textSize="24sp"
-            android:text="tan"
-            style="?android:attr/borderlessButtonStyle"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:visibility="invisible"/>
-    </LinearLayout>
+        android:layout_height="100dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="vertical"
+        android:visibility="visible">
 
-    <!-- Row 2 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_weight="1"
-        android:visibility="visible"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/btnINV"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+        <!-- Row 1 -->
+        <LinearLayout
+            android:id="@+id/llMoreOperations1"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
             android:layout_weight="1"
-            android:background="@drawable/rounded_button"
-            android:backgroundTint="@color/white"
-            android:layout_margin="5dp"
-            android:textSize="24sp"
-            android:text="INV"
-            style="?android:attr/borderlessButtonStyle"/>
-        <Button
-            android:id="@+id/btnExponent"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btnDEG"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/white"
+                android:layout_margin="5dp"
+                android:textSize="24sp"
+                android:text="DEG"
+                style="?android:attr/borderlessButtonStyle"/>
+            <Button
+                android:id="@+id/btnSine"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/white"
+                android:layout_margin="5dp"
+                android:textSize="24sp"
+                android:text="sin"
+                style="?android:attr/borderlessButtonStyle"/>
+            <Button
+                android:id="@+id/btnCosine"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/white"
+                android:layout_margin="5dp"
+                android:textSize="24sp"
+                android:text="cos"
+                style="?android:attr/borderlessButtonStyle"/>
+            <Button
+                android:id="@+id/btnTangent"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/white"
+                android:layout_margin="5dp"
+                android:textSize="24sp"
+                android:text="tan"
+                style="?android:attr/borderlessButtonStyle"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+        </LinearLayout>
+
+        <!-- Row 2 -->
+        <LinearLayout
+            android:id="@+id/llMoreOperations2"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
             android:layout_weight="1"
-            android:background="@drawable/rounded_button"
-            android:backgroundTint="@color/white"
-            android:layout_margin="5dp"
-            android:textSize="24sp"
-            android:text="e"
-            style="?android:attr/borderlessButtonStyle"/>
-        <Button
-            android:id="@+id/btnNaturalLogarithm"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_button"
-            android:backgroundTint="@color/white"
-            android:layout_margin="5dp"
-            android:textSize="24sp"
-            android:text="ln"
-            style="?android:attr/borderlessButtonStyle"/>
-        <Button
-            android:id="@+id/btnLogarithm"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_button"
-            android:backgroundTint="@color/white"
-            android:layout_margin="5dp"
-            android:textSize="24sp"
-            android:text="log"
-            style="?android:attr/borderlessButtonStyle"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:visibility="invisible"/>
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btnINV"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/white"
+                android:layout_margin="5dp"
+                android:textSize="24sp"
+                android:text="INV"
+                style="?android:attr/borderlessButtonStyle"/>
+            <Button
+                android:id="@+id/btnExponent"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/white"
+                android:layout_margin="5dp"
+                android:textSize="24sp"
+                android:text="e"
+                style="?android:attr/borderlessButtonStyle"/>
+            <Button
+                android:id="@+id/btnNaturalLogarithm"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/white"
+                android:layout_margin="5dp"
+                android:textSize="24sp"
+                android:text="ln"
+                style="?android:attr/borderlessButtonStyle"/>
+            <Button
+                android:id="@+id/btnLogarithm"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/white"
+                android:layout_margin="5dp"
+                android:textSize="24sp"
+                android:text="log"
+                style="?android:attr/borderlessButtonStyle"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+        </LinearLayout>
+
     </LinearLayout>
 
     <!-- Row 3 -->
