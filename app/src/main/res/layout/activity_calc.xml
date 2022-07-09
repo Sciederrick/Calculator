@@ -92,7 +92,7 @@
         android:layout_height="100dp"
         android:layout_marginBottom="5dp"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <!-- Row 1 -->
         <LinearLayout
