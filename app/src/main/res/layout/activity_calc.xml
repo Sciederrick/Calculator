@@ -22,8 +22,8 @@
         android:layout_height="200dp"
         android:background="@drawable/rounded_text_view"
         android:backgroundTint="@color/alice_blue"
-        android:textSize="44sp"
-        android:maxLength="12"/>
+        android:autoSizeTextType="uniform"
+        android:textAlignment="textEnd"/>
 
     <!-- Row 0 -->
     <LinearLayout

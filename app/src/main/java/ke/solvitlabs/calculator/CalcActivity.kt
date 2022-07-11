@@ -24,6 +24,22 @@ class CalcActivity : AppCompatActivity() {
         binding.btnShowMoreOperations.setOnClickListener {
             toggleExtraOperations()
         }
+
+        binding.btnAC.setOnClickListener { binding.tvInput.text = "" }
+        binding.btnZero.setOnClickListener { binding.tvInput.append("0") }
+        binding.btnOne.setOnClickListener { binding.tvInput.append("1") }
+        binding.btnTwo.setOnClickListener { binding.tvInput.append("2") }
+        binding.btnThree.setOnClickListener { binding.tvInput.append("3") }
+        binding.btnFour.setOnClickListener { binding.tvInput.append("4") }
+        binding.btnFive.setOnClickListener { binding.tvInput.append("5") }
+        binding.btnSix.setOnClickListener { binding.tvInput.append("6") }
+        binding.btnSeven.setOnClickListener { binding.tvInput.append("7") }
+        binding.btnEight.setOnClickListener { binding.tvInput.append("8") }
+        binding.btnNine.setOnClickListener { binding.tvInput.append("9") }
+        binding.btnDot.setOnClickListener { binding.tvInput.append(".") }
+        binding.btnBackspace.setOnClickListener { backspace() }
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -58,6 +74,18 @@ class CalcActivity : AppCompatActivity() {
             ContextCompat.getDrawable(this, R.drawable.ic_baseline_expand_more)
         }
     }
+
+
+    private fun backspace() {
+        var buffer = binding.tvInput.text
+        buffer = buffer.dropLast(1)
+        binding.tvInput.text = buffer
+    }
+
+    private fun add() {
+
+    }
+
 
 }
 
