@@ -42,6 +42,7 @@
             android:layout_marginHorizontal="10dp"
             android:textSize="30sp"
             android:text="√"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnPI"
@@ -53,6 +54,7 @@
             android:layout_marginHorizontal="10dp"
             android:textSize="30sp"
             android:text="兀"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnToThePowerOf"
@@ -64,6 +66,7 @@
             android:layout_marginHorizontal="10dp"
             android:textSize="30sp"
             android:text="⌃"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnFactorial"
@@ -75,6 +78,7 @@
             android:layout_marginHorizontal="10dp"
             android:textSize="30sp"
             android:text="!"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnShowMoreOperations"
@@ -111,6 +115,7 @@
                 android:layout_margin="5dp"
                 android:textSize="24sp"
                 android:text="DEG"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 style="?android:attr/borderlessButtonStyle"/>
             <Button
                 android:id="@+id/btnSine"
@@ -122,6 +127,7 @@
                 android:layout_margin="5dp"
                 android:textSize="24sp"
                 android:text="sin"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 style="?android:attr/borderlessButtonStyle"/>
             <Button
                 android:id="@+id/btnCosine"
@@ -133,6 +139,7 @@
                 android:layout_margin="5dp"
                 android:textSize="24sp"
                 android:text="cos"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 style="?android:attr/borderlessButtonStyle"/>
             <Button
                 android:id="@+id/btnTangent"
@@ -144,6 +151,7 @@
                 android:layout_margin="5dp"
                 android:textSize="24sp"
                 android:text="tan"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 style="?android:attr/borderlessButtonStyle"/>
             <Button
                 android:layout_width="0dp"
@@ -169,6 +177,7 @@
                 android:layout_margin="5dp"
                 android:textSize="24sp"
                 android:text="INV"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 style="?android:attr/borderlessButtonStyle"/>
             <Button
                 android:id="@+id/btnExponent"
@@ -180,6 +189,7 @@
                 android:layout_margin="5dp"
                 android:textSize="24sp"
                 android:text="e"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 style="?android:attr/borderlessButtonStyle"/>
             <Button
                 android:id="@+id/btnNaturalLogarithm"
@@ -191,6 +201,7 @@
                 android:layout_margin="5dp"
                 android:textSize="24sp"
                 android:text="ln"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 style="?android:attr/borderlessButtonStyle"/>
             <Button
                 android:id="@+id/btnLogarithm"
@@ -202,6 +213,7 @@
                 android:layout_margin="5dp"
                 android:textSize="24sp"
                 android:text="log"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 style="?android:attr/borderlessButtonStyle"/>
             <Button
                 android:layout_width="0dp"
@@ -228,6 +240,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="AC"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnParenthesis"
@@ -239,6 +252,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="( )"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnModulus"
@@ -250,6 +264,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="%"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnDivision"
@@ -261,6 +276,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="÷"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
     </LinearLayout>
 
@@ -279,6 +295,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="7"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnEight"
@@ -289,6 +306,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="8"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnNine"
@@ -299,6 +317,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="9"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnMultiplication"
@@ -310,6 +329,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="×"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
     </LinearLayout>
 
@@ -328,6 +348,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="4"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnFive"
@@ -338,6 +359,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="5"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnSix"
@@ -348,6 +370,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="6"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnMinus"
@@ -359,6 +382,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="−"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
     </LinearLayout>
 
@@ -377,6 +401,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="1"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnTwo"
@@ -387,6 +412,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="2"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnThree"
@@ -397,6 +423,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="3"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnAddition"
@@ -408,6 +435,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="+"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
     </LinearLayout>
 
@@ -426,6 +454,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="0"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnDot"
@@ -436,6 +465,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="•"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnBackspace"
@@ -446,6 +476,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="\u232b"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btnEquals"
@@ -457,6 +488,7 @@
             android:layout_margin="5dp"
             android:textSize="30sp"
             android:text="="
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
     </LinearLayout>
 
