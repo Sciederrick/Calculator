@@ -15,11 +15,18 @@
             android:background="@color/alice_blue"
             android:minHeight="?attr/actionBarSize">
         </androidx.appcompat.widget.Toolbar>
-
     <TextView
         android:id="@+id/tvInput"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="120dp"
+        android:background="@color/alice_blue"
+        android:textColor="@color/black"
+        android:autoSizeTextType="uniform"
+        android:textAlignment="textEnd"/>
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
         android:background="@drawable/rounded_text_view"
         android:backgroundTint="@color/alice_blue"
         android:autoSizeTextType="uniform"
@@ -267,7 +274,7 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
-            android:id="@+id/btnDivision"
+            android:id="@+id/btnDivide"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -320,7 +327,7 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
-            android:id="@+id/btnMultiplication"
+            android:id="@+id/btnMultiply"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -426,7 +433,7 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
-            android:id="@+id/btnAddition"
+            android:id="@+id/btnAdd"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

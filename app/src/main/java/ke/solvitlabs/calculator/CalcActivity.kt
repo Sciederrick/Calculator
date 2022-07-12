@@ -11,6 +11,9 @@ import ke.solvitlabs.calculator.databinding.ActivityCalcBinding
 
 class CalcActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCalcBinding
+    private var isOperator = false
+    private var operators = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,20 +28,24 @@ class CalcActivity : AppCompatActivity() {
             toggleExtraOperations()
         }
 
-        binding.btnAC.setOnClickListener { binding.tvInput.text = "" }
-        binding.btnZero.setOnClickListener { binding.tvInput.append("0") }
-        binding.btnOne.setOnClickListener { binding.tvInput.append("1") }
-        binding.btnTwo.setOnClickListener { binding.tvInput.append("2") }
-        binding.btnThree.setOnClickListener { binding.tvInput.append("3") }
-        binding.btnFour.setOnClickListener { binding.tvInput.append("4") }
-        binding.btnFive.setOnClickListener { binding.tvInput.append("5") }
-        binding.btnSix.setOnClickListener { binding.tvInput.append("6") }
-        binding.btnSeven.setOnClickListener { binding.tvInput.append("7") }
-        binding.btnEight.setOnClickListener { binding.tvInput.append("8") }
-        binding.btnNine.setOnClickListener { binding.tvInput.append("9") }
-        binding.btnDot.setOnClickListener { binding.tvInput.append(".") }
+        binding.btnAC.setOnClickListener { clear() }
+        binding.btnZero.setOnClickListener { appendToTextView("0") }
+        binding.btnOne.setOnClickListener { appendToTextView("1") }
+        binding.btnTwo.setOnClickListener { appendToTextView("2") }
+        binding.btnThree.setOnClickListener { appendToTextView("3") }
+        binding.btnFour.setOnClickListener { appendToTextView("4") }
+        binding.btnFive.setOnClickListener { appendToTextView("5") }
+        binding.btnSix.setOnClickListener { appendToTextView("6") }
+        binding.btnSeven.setOnClickListener { appendToTextView("7") }
+        binding.btnEight.setOnClickListener { appendToTextView("8") }
+        binding.btnNine.setOnClickListener { appendToTextView("9") }
+        binding.btnDot.setOnClickListener { appendToTextView(".") }
         binding.btnBackspace.setOnClickListener { backspace() }
-
+        binding.btnAdd.setOnClickListener { appendToTextView("+") }
+        binding.btnMinus.setOnClickListener { appendToTextView("-") }
+        binding.btnDivide.setOnClickListener { appendToTextView("÷") }
+        binding.btnMultiply.setOnClickListener { appendToTextView("×") }
+        binding.btnModulus.setOnClickListener { appendToTextView("%") }
 
     }
 
@@ -75,15 +82,47 @@ class CalcActivity : AppCompatActivity() {
         }
     }
 
+    private fun clear() {
+        binding.tvInput.text = ""
+        isOperator = false
+        operators = 0
+
+        displayResult(operators.toString())
+    }
 
     private fun backspace() {
         var buffer = binding.tvInput.text
+        var elementToDrop = buffer[buffer.length - 1]
+
         buffer = buffer.dropLast(1)
         binding.tvInput.text = buffer
+
+        if (isOperator(elementToDrop.toString())) {
+            if (operators > 0)
+                operators--
+
+            if (operators === 0)
+                isOperator = false
+        }
+
+        displayResult(operators.toString())
     }
 
-    private fun add() {
+    private fun appendToTextView(symbol:String) {
+        binding.tvInput.append(symbol)
 
+        if (isOperator(symbol)) {
+            isOperator = true
+            operators++
+        }
+    }
+
+    private fun isOperator(symbol:String) :Boolean {
+        return symbol == "+" || symbol == "-" || symbol == "÷" || symbol == "×" || symbol == "%"
+    }
+
+    private fun displayResult(result:String) {
+        binding.tvResult.text = result
     }
 
 
