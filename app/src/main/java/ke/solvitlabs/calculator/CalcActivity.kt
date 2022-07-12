@@ -13,6 +13,12 @@ class CalcActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCalcBinding
     private var isOperator = false
     private var operators = 0
+    private var isCalculable = false
+    private var operatorCategories: HashMap<String, String> = HashMap<String, String> ()
+
+    init {
+        initializeOperatorCategories()
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,12 +88,29 @@ class CalcActivity : AppCompatActivity() {
         }
     }
 
+    private fun initializeOperatorCategories() {
+        operatorCategories["兀"] = "standalone"
+        operatorCategories["e"] = "standalone"
+        operatorCategories["sin"] = "prefix"
+        operatorCategories["cos"] = "prefix"
+        operatorCategories["tan"] = "prefix"
+        operatorCategories["ln"] = "prefix"
+        operatorCategories["log"] = "prefix"
+        operatorCategories["√"] = "prefix"
+        operatorCategories["!"] = "postfix"
+        operatorCategories["⌃"] = "infix"
+        operatorCategories["+"] = "infix"
+        operatorCategories["−"] = "infix"
+        operatorCategories["×"] = "infix"
+        operatorCategories["%"] = "infix"
+        operatorCategories["÷"] = "infix"
+    }
+
     private fun clear() {
         binding.tvInput.text = ""
         isOperator = false
         operators = 0
 
-        displayResult(operators.toString())
     }
 
     private fun backspace() {
@@ -105,7 +128,6 @@ class CalcActivity : AppCompatActivity() {
                 isOperator = false
         }
 
-        displayResult(operators.toString())
     }
 
     private fun appendToTextView(symbol:String) {
@@ -125,6 +147,14 @@ class CalcActivity : AppCompatActivity() {
         binding.tvResult.text = result
     }
 
+    private fun isCalculable() {
+        // TODO: perform check to establish if it has the correct format b4 calculating
+
+    }
+
+    private fun calculate() {
+
+    }
 
 }
 
