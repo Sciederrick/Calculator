@@ -187,7 +187,7 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 style="?android:attr/borderlessButtonStyle"/>
             <Button
-                android:id="@+id/btnExponent"
+                android:id="@+id/btnEular"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

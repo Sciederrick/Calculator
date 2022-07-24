@@ -8,17 +8,23 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import ke.solvitlabs.calculator.databinding.ActivityCalcBinding
+import kotlin.math.E
+import kotlin.properties.Delegates
 
 class CalcActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCalcBinding
     private var isOperator = false
-    private var operators = 0
+    private var numOperators = 0
     private var isCalculable = false
-    private var operatorCategories: HashMap<String, String> = HashMap<String, String> ()
-
-    init {
-        initializeOperatorCategories()
-    }
+    private var operatorsWithPosition = HashMap<String, Int>()
+    private var operatorsWithPriority = HashMap<String, Int>()
+    private lateinit var expression: String
+    private lateinit var subExpression: String
+    private var operatorPosition: Int by Delegates.notNull<Int>()
+    private var leftOperand:String? = null
+    private var rightOperand:String? = null
+    private var currentOperator: String? = null
+    private var result: Double? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +58,7 @@ class CalcActivity : AppCompatActivity() {
         binding.btnDivide.setOnClickListener { appendToTextView("÷") }
         binding.btnMultiply.setOnClickListener { appendToTextView("×") }
         binding.btnModulus.setOnClickListener { appendToTextView("%") }
-
+        binding.btnEular.setOnClickListener { appendToTextView("e") }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -88,29 +94,11 @@ class CalcActivity : AppCompatActivity() {
         }
     }
 
-    private fun initializeOperatorCategories() {
-        operatorCategories["兀"] = "standalone"
-        operatorCategories["e"] = "standalone"
-        operatorCategories["sin"] = "prefix"
-        operatorCategories["cos"] = "prefix"
-        operatorCategories["tan"] = "prefix"
-        operatorCategories["ln"] = "prefix"
-        operatorCategories["log"] = "prefix"
-        operatorCategories["√"] = "prefix"
-        operatorCategories["!"] = "postfix"
-        operatorCategories["⌃"] = "infix"
-        operatorCategories["+"] = "infix"
-        operatorCategories["−"] = "infix"
-        operatorCategories["×"] = "infix"
-        operatorCategories["%"] = "infix"
-        operatorCategories["÷"] = "infix"
-    }
-
     private fun clear() {
         binding.tvInput.text = ""
         isOperator = false
-        operators = 0
-
+        numOperators = 0
+        isCalculable = false
     }
 
     private fun backspace() {
@@ -121,39 +109,155 @@ class CalcActivity : AppCompatActivity() {
         binding.tvInput.text = buffer
 
         if (isOperator(elementToDrop.toString())) {
-            if (operators > 0)
-                operators--
+            if (numOperators > 0)
+                numOperators--
 
-            if (operators === 0)
+            if (numOperators === 0) {
                 isOperator = false
+                isCalculable = false
+            }
         }
 
     }
 
     private fun appendToTextView(symbol:String) {
         binding.tvInput.append(symbol)
+        expression = binding.tvInput.text.toString()
 
         if (isOperator(symbol)) {
             isOperator = true
-            operators++
+            numOperators++
         }
+
+        if(isOperator && isCalculable()) calculate()
     }
 
     private fun isOperator(symbol:String) :Boolean {
-        return symbol == "+" || symbol == "-" || symbol == "÷" || symbol == "×" || symbol == "%"
+        return CalcOperations.operations.containsKey(symbol)
     }
 
     private fun displayResult(result:String) {
         binding.tvResult.text = result
     }
 
-    private fun isCalculable() {
-        // TODO: perform check to establish if it has the correct format b4 calculating
-
+    private fun isCalculable() :Boolean{
+        // The last input entered can't be an infix or a prefix
+        return when(CalcOperations.operations[expression]?.category) {
+            "infix" -> false
+            "prefix" -> false
+            else -> true// "postfix", "standalone" operators & numbers 0..9
+        }
     }
 
     private fun calculate() {
+        // 1.Obtain operators & their positions
 
+        for((index, ch) in expression.withIndex()) {
+            val symbol = ch.toString()
+           if (symbol in CalcOperations.operations.keys) {
+               operatorsWithPosition[symbol] = index
+               operatorsWithPriority[symbol] = CalcOperations.operations[symbol]?.priority!!
+               numOperators++
+           }
+
+        }
+
+        // 2.Sort operators according to their priority level
+        if (operatorsWithPriority.size > 1) {
+            operatorsWithPriority = operatorsWithPriority.toList().sortedBy { (_, value) -> value }.toMap() as HashMap<String, Int>
+        }
+
+        // 3.For each operator, find operand(s)
+        for (operator in operatorsWithPriority.keys) {
+            currentOperator = operator
+            operatorPosition = operatorsWithPosition[operator]!!
+            // Check left and right of the operator until and stop at next/previous operator
+            when (operatorPosition) {
+                0 -> gatherRightOperand()
+                in 1 until (expression?.length?.minus(1)!!) -> {
+                    gatherLeftOperand()
+                    gatherRightOperand()
+                }
+                else -> gatherLeftOperand()
+            }
+
+            // 4.Evaluate
+            if (leftOperand != null && rightOperand != null) {
+                result = evaluate(operand1 = true, operand2 = true)
+            } else if (leftOperand != null) {
+                result = evaluate(operand1 = true, operand2 = false)
+            } else if (rightOperand != null) {
+                result = evaluate(operand1 = false, operand2 = true)
+            } else {
+                result = evaluate(operand1 = false, operand2 = false)
+            }
+
+            // 5.Check operator category then create subexpression
+            subExpression = createSubExpression(operator)
+
+            // 6.Modify original expression using subexpression
+            expression = expression.replaceFirst(subExpression, result.toString())
+
+            // 7.Display result
+            displayResult(result.toString())
+        }
+
+
+    }
+
+    private fun gatherLeftOperand() {
+        for (ch in operatorPosition downTo 0) {
+            leftOperand = if (CalcOperations.operations.containsKey(ch.toString())) {
+                leftOperand?.reversed()
+                break
+            } else {
+                // it's part of the operand
+                leftOperand.plus(ch)
+            }
+
+        }
+    }
+    private fun gatherRightOperand() {
+        for (ch in operatorPosition until expression.length - 1) {
+            rightOperand = if (CalcOperations.operations.containsKey(ch.toString())) {
+                break
+            } else {
+                // it's part of the operand
+                rightOperand.plus(ch)
+            }
+        }
+    }
+
+    private fun evaluate(operand1: Boolean, operand2: Boolean): Double? {
+        var result: Double? = null
+        when (currentOperator) {
+            "e" -> {
+                if (operand1 && operand2) {
+                    result = rightOperand?.toDouble()?.let { leftOperand?.toDouble()?.times(it) }
+                    result = result?.times(E)
+                } else if (operand1) {
+                    result = leftOperand?.toDouble()?.times(E)
+                } else if (operand2){
+                    result = rightOperand?.toDouble()?.times(E)
+                } else {
+                    result = E
+                }
+            }
+        }
+        return result
+    }
+
+    private fun createSubExpression(operator: String) :String{        
+        return if (leftOperand != null && rightOperand != null) {
+            leftOperand.plus(operator).plus(rightOperand)
+        } else if (leftOperand != null) {
+            leftOperand.plus(operator)
+        } else if (rightOperand != null) {
+            operator.plus(rightOperand)
+        } else {
+            operator
+        }
+        
     }
 
 }
