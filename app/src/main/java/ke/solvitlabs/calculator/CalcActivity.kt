@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import ke.solvitlabs.calculator.databinding.ActivityCalcBinding
+import java.time.Duration
 import kotlin.math.E
 import kotlin.properties.Delegates
 
@@ -136,7 +137,7 @@ class CalcActivity : AppCompatActivity() {
         return CalcOperations.operations.containsKey(symbol)
     }
 
-    private fun displayResult(result:String) {
+    private fun displayResult(result: String) {
         binding.tvResult.text = result
     }
 
@@ -165,7 +166,6 @@ class CalcActivity : AppCompatActivity() {
         // 2.Sort operators according to their priority level
         if (operatorsWithPriority.size > 1) {
             operatorsWithPriority = operatorsWithPriority.toList().sortedBy { (_, value) -> value }.toMap() as HashMap<String, Int>
-            println(operatorsWithPriority)
         }
 
         // 3.For each operator, find operand(s)
@@ -200,7 +200,8 @@ class CalcActivity : AppCompatActivity() {
             expression = expression.replaceFirst(subExpression, result.toString())
 
             // 7.Display result
-            displayResult(result.toString())
+            if (result != null)
+                displayResult(result.toString())
         }
 
 
@@ -213,6 +214,7 @@ class CalcActivity : AppCompatActivity() {
                 break
             } else {
                 // it's part of the operand
+                if (leftOperand == null) leftOperand = ""
                 leftOperand.plus(ch)
             }
 
@@ -224,6 +226,7 @@ class CalcActivity : AppCompatActivity() {
                 break
             } else {
                 // it's part of the operand
+                if (rightOperand == null) rightOperand = ""
                 rightOperand.plus(ch)
             }
         }
@@ -237,8 +240,9 @@ class CalcActivity : AppCompatActivity() {
                     result = rightOperand?.toDouble()?.let { leftOperand?.toDouble()?.times(it) }
                     result = result?.times(E)
                 } else if (operand1) {
-//                    result = leftOperand?.toDouble()?.times(E)
-                    result = leftOperand?.toDouble()
+                    Toast.makeText(this, leftOperand, Toast.LENGTH_SHORT).show()
+
+                    result = leftOperand?.toDouble()?.times(E)
                 } else if (operand2){
                     result = rightOperand?.toDouble()?.times(E)
                 } else {
