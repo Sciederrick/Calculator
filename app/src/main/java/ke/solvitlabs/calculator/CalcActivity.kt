@@ -165,6 +165,7 @@ class CalcActivity : AppCompatActivity() {
         // 2.Sort operators according to their priority level
         if (operatorsWithPriority.size > 1) {
             operatorsWithPriority = operatorsWithPriority.toList().sortedBy { (_, value) -> value }.toMap() as HashMap<String, Int>
+            println(operatorsWithPriority)
         }
 
         // 3.For each operator, find operand(s)
@@ -236,7 +237,8 @@ class CalcActivity : AppCompatActivity() {
                     result = rightOperand?.toDouble()?.let { leftOperand?.toDouble()?.times(it) }
                     result = result?.times(E)
                 } else if (operand1) {
-                    result = leftOperand?.toDouble()?.times(E)
+//                    result = leftOperand?.toDouble()?.times(E)
+                    result = leftOperand?.toDouble()
                 } else if (operand2){
                     result = rightOperand?.toDouble()?.times(E)
                 } else {
