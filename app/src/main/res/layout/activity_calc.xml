@@ -262,7 +262,7 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
-            android:id="@+id/btnModulus"
+            android:id="@+id/btnPercent"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
