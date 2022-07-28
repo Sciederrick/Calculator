@@ -57,7 +57,7 @@ class CalcActivity : AppCompatActivity() {
         binding.btnMinus.setOnClickListener { appendToTextView("-") }
         binding.btnDivide.setOnClickListener { appendToTextView("÷") }
         binding.btnMultiply.setOnClickListener { appendToTextView("×") }
-        binding.btnModulus.setOnClickListener { appendToTextView("%") }
+        binding.btnPercent.setOnClickListener { appendToTextView("%") }
         binding.btnEular.setOnClickListener { appendToTextView("e") }
     }
 
