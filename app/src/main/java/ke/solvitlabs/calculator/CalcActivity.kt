@@ -20,7 +20,7 @@ class CalcActivity : AppCompatActivity() {
     private var operatorsWithPriority = HashMap<String, Int>()
     private lateinit var expression: String
     private lateinit var subExpression: String
-    private var operatorPosition: Int by Delegates.notNull<Int>()
+    private var operatorPosition: Int by Delegates.notNull()
     private var leftOperand:String? = null
     private var rightOperand:String? = null
     private var currentOperator: String? = null
@@ -77,7 +77,7 @@ class CalcActivity : AppCompatActivity() {
     }
 
     private fun toggleExtraOperations() {
-        binding.llMoreOperations.visibility = if (binding.llMoreOperations.visibility === View.VISIBLE) {
+        binding.llMoreOperations.visibility = if (binding.llMoreOperations.visibility == View.VISIBLE) {
             toggleBtnIcon(View.GONE)
             View.GONE
         } else {
@@ -87,7 +87,7 @@ class CalcActivity : AppCompatActivity() {
     }
 
     private fun toggleBtnIcon(visibility: Int) {
-        binding.btnShowMoreOperations.background = if (visibility === View.VISIBLE) {
+        binding.btnShowMoreOperations.background = if (visibility == View.VISIBLE) {
             ContextCompat.getDrawable(this, R.drawable.ic_baseline_expand_less)
         } else {
             ContextCompat.getDrawable(this, R.drawable.ic_baseline_expand_more)
@@ -103,7 +103,7 @@ class CalcActivity : AppCompatActivity() {
 
     private fun backspace() {
         var buffer = binding.tvInput.text
-        var elementToDrop = buffer[buffer.length - 1]
+        val elementToDrop = buffer[buffer.length - 1]
 
         buffer = buffer.dropLast(1)
         binding.tvInput.text = buffer
@@ -112,7 +112,7 @@ class CalcActivity : AppCompatActivity() {
             if (numOperators > 0)
                 numOperators--
 
-            if (numOperators === 0) {
+            if (numOperators == 0) {
                 isOperator = false
                 isCalculable = false
             }
@@ -174,7 +174,7 @@ class CalcActivity : AppCompatActivity() {
             // Check left and right of the operator until and stop at next/previous operator
             when (operatorPosition) {
                 0 -> gatherRightOperand()
-                in 1 until (expression?.length?.minus(1)!!) -> {
+                in 1 until (expression.length.minus(1)) -> {
                     gatherLeftOperand()
                     gatherRightOperand()
                 }
@@ -182,14 +182,14 @@ class CalcActivity : AppCompatActivity() {
             }
 
             // 4.Evaluate
-            if (leftOperand != null && rightOperand != null) {
-                result = evaluate(operand1 = true, operand2 = true)
+            result = if (leftOperand != null && rightOperand != null) {
+                evaluate(operand1 = true, operand2 = true)
             } else if (leftOperand != null) {
-                result = evaluate(operand1 = true, operand2 = false)
+                evaluate(operand1 = true, operand2 = false)
             } else if (rightOperand != null) {
-                result = evaluate(operand1 = false, operand2 = true)
+                evaluate(operand1 = false, operand2 = true)
             } else {
-                result = evaluate(operand1 = false, operand2 = false)
+                evaluate(operand1 = false, operand2 = false)
             }
 
             // 5.Check operator category then create subexpression
