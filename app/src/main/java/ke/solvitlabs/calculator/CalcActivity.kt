@@ -100,6 +100,10 @@ class CalcActivity : AppCompatActivity() {
         isOperator = false
         numOperators = 0
         isCalculable = false
+        leftOperand = null
+        rightOperand = null
+        result = null
+        binding.tvResult.text = ""
     }
 
     private fun backspace() {
@@ -118,6 +122,8 @@ class CalcActivity : AppCompatActivity() {
                 isCalculable = false
             }
         }
+
+        // TODO: Check if expression is still calculable
 
     }
 
@@ -208,26 +214,34 @@ class CalcActivity : AppCompatActivity() {
     }
 
     private fun gatherLeftOperand() {
-        for (ch in operatorPosition downTo 0) {
-            leftOperand = if (CalcOperations.operations.containsKey(ch.toString())) {
+        val count = operatorPosition - 1
+        var element: String? = null
+        for (i in count downTo 0) {
+            element = expression[i].toString()
+            leftOperand = if (CalcOperations.operations.containsKey(element)) {
                 leftOperand?.reversed()
                 break
             } else {
                 // it's part of the operand
                 if (leftOperand == null) leftOperand = ""
-                leftOperand.plus(ch)
+                leftOperand.plus(element)
             }
 
         }
+
     }
     private fun gatherRightOperand() {
-        for (ch in operatorPosition until expression.length - 1) {
-            rightOperand = if (CalcOperations.operations.containsKey(ch.toString())) {
+        val count = operatorPosition + 1
+        val lastElement = expression.length - 1
+        var element: String? = null
+        for (i in count until lastElement) {
+            element = expression[i].toString()
+            rightOperand = if (CalcOperations.operations.containsKey(element)) {
                 break
             } else {
                 // it's part of the operand
                 if (rightOperand == null) rightOperand = ""
-                rightOperand.plus(ch)
+                rightOperand.plus(element)
             }
         }
     }
@@ -240,8 +254,6 @@ class CalcActivity : AppCompatActivity() {
                     result = rightOperand?.toDouble()?.let { leftOperand?.toDouble()?.times(it) }
                     result = result?.times(E)
                 } else if (operand1) {
-                    Toast.makeText(this, leftOperand, Toast.LENGTH_SHORT).show()
-
                     result = leftOperand?.toDouble()?.times(E)
                 } else if (operand2){
                     result = rightOperand?.toDouble()?.times(E)
