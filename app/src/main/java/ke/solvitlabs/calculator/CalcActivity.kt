@@ -199,13 +199,17 @@ class CalcActivity : AppCompatActivity() {
                 evaluate(operand1 = false, operand2 = false)
             }
 
-            // 5.Check operator category then create subexpression
-            subExpression = createSubExpression(operator)
+            // 5. Reset operands
+            rightOperand = null
+            leftOperand = null
 
-            // 6.Modify original expression using subexpression
-            expression = expression.replaceFirst(subExpression, result.toString())
+            // 6.Check operator category then create subexpression
+//            subExpression = createSubExpression(operator)
 
-            // 7.Display result
+            // 7.Modify original expression using subexpression
+//            expression = expression.replaceFirst(subExpression, result.toString())
+
+            // 8.Display result
             if (result != null)
                 displayResult(result.toString())
         }
@@ -232,7 +236,7 @@ class CalcActivity : AppCompatActivity() {
     }
     private fun gatherRightOperand() {
         val count = operatorPosition + 1
-        val lastElement = expression.length - 1
+        val lastElement = expression.length
         var element: String? = null
         for (i in count until lastElement) {
             element = expression[i].toString()
@@ -250,15 +254,14 @@ class CalcActivity : AppCompatActivity() {
         var result: Double? = null
         when (currentOperator) {
             "e" -> {
-                if (operand1 && operand2) {
-                    result = rightOperand?.toDouble()?.let { leftOperand?.toDouble()?.times(it) }
-                    result = result?.times(E)
+                result = if (operand1 && operand2) {
+                    rightOperand?.toDouble()?.let { leftOperand?.toDouble()?.times(it)?.times(E) }
                 } else if (operand1) {
-                    result = leftOperand?.toDouble()?.times(E)
+                    leftOperand?.toDouble()?.times(E)
                 } else if (operand2){
-                    result = rightOperand?.toDouble()?.times(E)
+                    rightOperand?.toDouble()?.times(E)
                 } else {
-                    result = E
+                    E
                 }
             }
         }
