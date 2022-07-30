@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import ke.solvitlabs.calculator.databinding.ActivityCalcBinding
-import java.time.Duration
 import kotlin.math.E
 import kotlin.properties.Delegates
 
@@ -17,10 +16,9 @@ class CalcActivity : AppCompatActivity() {
     private var isOperator = false
     private var numOperators = 0
     private var isCalculable = false
-    private var operatorsWithPosition = HashMap<String, Int>()
-    private var operatorsWithPriority = HashMap<String, Int>()
+    private var operatorsWithPosition = ArrayList<Pair<String, Int>>()
+    private var operatorsWithPriority = ArrayList<Pair<String, Int>>()
     private lateinit var expression: String
-    private lateinit var subExpression: String
     private var operatorPosition: Int by Delegates.notNull()
     private var leftOperand:String? = null
     private var rightOperand:String? = null
@@ -103,6 +101,8 @@ class CalcActivity : AppCompatActivity() {
         leftOperand = null
         rightOperand = null
         result = null
+        operatorsWithPosition.clear()
+        operatorsWithPriority.clear()
         binding.tvResult.text = ""
     }
 
@@ -158,12 +158,11 @@ class CalcActivity : AppCompatActivity() {
 
     private fun calculate() {
         // 1.Obtain operators & their positions
-
         for((index, ch) in expression.withIndex()) {
             val symbol = ch.toString()
            if (symbol in CalcOperations.operations.keys) {
-               operatorsWithPosition[symbol] = index
-               operatorsWithPriority[symbol] = CalcOperations.operations[symbol]?.priority!!
+               operatorsWithPosition.add(Pair(symbol, index))
+               operatorsWithPriority.add(Pair(symbol, CalcOperations.operations[symbol]?.priority!!))
                numOperators++
            }
 
@@ -171,13 +170,16 @@ class CalcActivity : AppCompatActivity() {
 
         // 2.Sort operators according to their priority level
         if (operatorsWithPriority.size > 1) {
-            operatorsWithPriority = operatorsWithPriority.toList().sortedBy { (_, value) -> value }.toMap() as HashMap<String, Int>
+            operatorsWithPriority = operatorsWithPriority.sortedBy { (_, value) -> value }.toList() as ArrayList<Pair<String,Int>>
         }
 
         // 3.For each operator, find operand(s)
-        for (operator in operatorsWithPriority.keys) {
+        lateinit var operator:String
+        for (item in operatorsWithPriority) {
+            operator = item.first
             currentOperator = operator
-            operatorPosition = operatorsWithPosition[operator]!!
+            operatorPosition = searchOperatorPosition(operator)
+
             // Check left and right of the operator until and stop at next/previous operator
             when (operatorPosition) {
                 0 -> gatherRightOperand()
@@ -185,19 +187,11 @@ class CalcActivity : AppCompatActivity() {
                     gatherLeftOperand()
                     gatherRightOperand()
                 }
-                else -> gatherLeftOperand()
+                expression.length - 1 -> gatherLeftOperand()
             }
 
             // 4.Evaluate
-            result = if (leftOperand != null && rightOperand != null) {
-                evaluate(operand1 = true, operand2 = true)
-            } else if (leftOperand != null) {
-                evaluate(operand1 = true, operand2 = false)
-            } else if (rightOperand != null) {
-                evaluate(operand1 = false, operand2 = true)
-            } else {
-                evaluate(operand1 = false, operand2 = false)
-            }
+            result = evaluate(operand1 = leftOperand != null, operand2 = rightOperand != null)
 
             // 5. Reset operands
             rightOperand = null
@@ -209,17 +203,17 @@ class CalcActivity : AppCompatActivity() {
             // 7.Modify original expression using subexpression
 //            expression = expression.replaceFirst(subExpression, result.toString())
 
-            // 8.Display result
-            if (result != null)
-                displayResult(result.toString())
         }
+        // 8.Display result
+        if (result != null)
+        displayResult(result.toString())
 
 
     }
 
     private fun gatherLeftOperand() {
         val count = operatorPosition - 1
-        var element: String? = null
+        var element: String?
         for (i in count downTo 0) {
             element = expression[i].toString()
             leftOperand = if (CalcOperations.operations.containsKey(element)) {
@@ -237,7 +231,7 @@ class CalcActivity : AppCompatActivity() {
     private fun gatherRightOperand() {
         val count = operatorPosition + 1
         val lastElement = expression.length
-        var element: String? = null
+        var element: String?
         for (i in count until lastElement) {
             element = expression[i].toString()
             rightOperand = if (CalcOperations.operations.containsKey(element)) {
@@ -255,7 +249,7 @@ class CalcActivity : AppCompatActivity() {
         when (currentOperator) {
             "e" -> {
                 result = if (operand1 && operand2) {
-                    rightOperand?.toDouble()?.let { leftOperand?.toDouble()?.times(it)?.times(E) }
+                    leftOperand?.toDouble()?.let { rightOperand?.toDouble()?.times(it)?.times(E) }
                 } else if (operand1) {
                     leftOperand?.toDouble()?.times(E)
                 } else if (operand2){
@@ -265,6 +259,7 @@ class CalcActivity : AppCompatActivity() {
                 }
             }
         }
+
         return result
     }
 
@@ -279,6 +274,17 @@ class CalcActivity : AppCompatActivity() {
             operator
         }
         
+    }
+
+    private fun searchOperatorPosition(operator: String) :Int{
+        var position: Int by Delegates.notNull()
+        for (item in operatorsWithPosition) {
+            if (item.first == operator) {
+                position = item.second
+                break
+            }
+        }
+        return position
     }
 
 }
