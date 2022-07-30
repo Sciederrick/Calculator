@@ -15,7 +15,6 @@ class CalcActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCalcBinding
     private var isOperator = false
     private var numOperators = 0
-    private var isCalculable = false
     private var operatorsWithPosition = ArrayList<Pair<String, Int>>()
     private var operatorsWithPriority = ArrayList<Pair<String, Int>>()
     private lateinit var expression: String
@@ -97,7 +96,6 @@ class CalcActivity : AppCompatActivity() {
         binding.tvInput.text = ""
         isOperator = false
         numOperators = 0
-        isCalculable = false
         leftOperand = null
         rightOperand = null
         result = null
@@ -112,6 +110,7 @@ class CalcActivity : AppCompatActivity() {
 
         buffer = buffer.dropLast(1)
         binding.tvInput.text = buffer
+        expression = buffer.toString()
 
         if (isOperator(elementToDrop.toString())) {
             if (numOperators > 0)
@@ -119,11 +118,16 @@ class CalcActivity : AppCompatActivity() {
 
             if (numOperators == 0) {
                 isOperator = false
-                isCalculable = false
             }
         }
 
         // TODO: Check if expression is still calculable
+        if (numOperators > 0 && buffer.isNotEmpty() && isCalculable()) {
+            calculate()
+            displayResult(result.toString())
+        } else {
+            binding.tvResult.text = ""
+        }
 
     }
 
@@ -149,7 +153,8 @@ class CalcActivity : AppCompatActivity() {
 
     private fun isCalculable() :Boolean{
         // The last input entered can't be an infix or a prefix
-        return when(CalcOperations.operations[expression]?.category) {
+        val lastSymbol = expression.last().toString()
+        return when(CalcOperations.operations[lastSymbol]?.category) {
             "infix" -> false
             "prefix" -> false
             else -> true// "postfix", "standalone" operators & numbers 0..9
@@ -163,7 +168,6 @@ class CalcActivity : AppCompatActivity() {
            if (symbol in CalcOperations.operations.keys) {
                operatorsWithPosition.add(Pair(symbol, index))
                operatorsWithPriority.add(Pair(symbol, CalcOperations.operations[symbol]?.priority!!))
-               numOperators++
            }
 
         }
